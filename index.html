@@ -524,6 +524,93 @@
       }
     }
   </style>
+  
+<style>
+/* KREOVANTA — Champagne, Ivory & Gold */
+:root {
+  --ivory: #FAF7F1;
+  --champagne: #E8D5B7;
+  --gold: #B8955A;
+  --espresso: #302820;
+  --muted: #776E63;
+  --white: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--espresso);
+  font-family: "Georgia", "Times New Roman", serif;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4 {
+  color: var(--espresso);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+p {
+  color: var(--muted);
+}
+
+a {
+  color: #8B6A38;
+  transition: color 0.25s ease;
+}
+
+a:hover {
+  color: var(--espresso);
+}
+
+button, .button, a.button,
+[role="button"] {
+  border-radius: 999px;
+  transition: all 0.25s ease;
+}
+
+button:hover, .button:hover,
+a.button:hover {
+  transform: translateY(-2px);
+}
+
+section {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+article, .card, .feature-card,
+.product-card {
+  border: 1px solid rgba(184, 149, 90, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(48, 40, 32, 0.06);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: var(--champagne);
+  color: var(--espresso);
+}
+
+@media (max-width: 600px) {
+  section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 9vw, 3.5rem);
+  }
+}
+</style>
+
 </head>
 
 <body>
