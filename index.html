@@ -2,1164 +2,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#102d25">
-  <meta name="description" content="KREOVANTA — your elegant creative workspace for ideas, design, content and planning.">
-  <title>KREOVANTA | Creative Workspace</title>
-
-  <style>
-    :root {
-      --green: #102d25;
-      --green2: #1c4538;
-      --cream: #f7f3e9;
-      --white: #fffdf7;
-      --gold: #c6a765;
-      --muted: #8b968d;
-      --line: #e5e0d4;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background: var(--cream);
-      color: var(--green);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      min-height: 100vh;
-    }
-
-    button, input, textarea, select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    .layout {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    aside {
-      width: 245px;
-      flex-shrink: 0;
-      background: var(--green);
-      color: white;
-      padding: 30px 18px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand {
-      padding: 5px 12px 35px;
-    }
-
-    .brand h1 {
-      font-family: Georgia, serif;
-      font-size: 26px;
-      letter-spacing: 3px;
-      color: var(--gold);
-    }
-
-    .brand p {
-      font-size: 10px;
-      letter-spacing: 3px;
-      margin-top: 8px;
-      color: #d5d8ce;
-    }
-
-    .nav-label {
-      color: #9fae9f;
-      font-size: 10px;
-      letter-spacing: 2px;
-      padding: 15px 12px 10px;
-    }
-
-    .nav-btn {
-      border: 0;
-      background: transparent;
-      color: #e2e8df;
-      text-align: left;
-      padding: 13px 12px;
-      border-radius: 10px;
-      margin: 3px 0;
-      font-size: 14px;
-      transition: .2s;
-    }
-
-    .nav-btn:hover,
-    .nav-btn.active {
-      background: var(--green2);
-      color: var(--gold);
-    }
-
-    .sidebar-note {
-      margin-top: auto;
-      padding: 18px 12px 0;
-      color: #b6c1b7;
-      font-size: 12px;
-      line-height: 1.8;
-      border-top: 1px solid #345044;
-    }
-
-    main {
-      flex: 1;
-      min-width: 0;
-      padding: 30px clamp(16px, 4vw, 48px);
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 35px;
-    }
-
-    .eyebrow {
-      color: #9a7a3d;
-      font-size: 10px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    h2 {
-      font-family: Georgia, serif;
-      font-size: clamp(25px, 4vw, 37px);
-      font-weight: 500;
-    }
-
-    .date {
-      color: #7c887f;
-      font-size: 12px;
-      margin-top: 9px;
-    }
-
-    .profile {
-      background: var(--green);
-      color: var(--gold);
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      font-family: Georgia, serif;
-      font-size: 19px;
-      flex-shrink: 0;
-    }
-
-    .hero {
-      background: var(--green);
-      color: white;
-      padding: clamp(25px, 5vw, 45px);
-      border-radius: 18px;
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 25px;
-    }
-
-  
-
-    .hero .eyebrow {
-      color: var(--gold);
-    }
-
-    .hero h2 {
-      max-width: 550px;
-      font-size: clamp(28px, 5vw, 43px);
-      line-height: 1.2;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      max-width: 470px;
-      color: #d6dfd6;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .primary, .secondary, .delete-btn {
-      border-radius: 9px;
-      padding: 12px 17px;
-      font-size: 13px;
-      transition: .2s;
-    }
-
-    .primary {
-      background: var(--gold);
-      color: #172d23;
-      border: 1px solid var(--gold);
-      font-weight: 600;
-      margin-top: 23px;
-    }
-
-    .primary:hover {
-      background: #dfc68f;
-    }
-
-    .secondary {
-      background: var(--white);
-      color: var(--green);
-      border: 1px solid var(--line);
-    }
-
-    .secondary:hover {
-      border-color: var(--gold);
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin: 30px 0 16px;
-    }
-
-    .section-heading h3 {
-      font-family: Georgia, serif;
-      font-size: 22px;
-      font-weight: 500;
-    }
-
-    .section-heading span {
-      color: #8a9388;
-      font-size: 12px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .stat, .panel, .tool-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-    }
-
-    .stat {
-      padding: 20px;
-    }
-
-    .stat .symbol {
-      color: #a98745;
-      font-size: 22px;
-    }
-
-    .stat h3 {
-      font-family: Georgia, serif;
-      font-size: 28px;
-      margin: 14px 0 5px;
-      font-weight: 500;
-    }
-
-    .stat p {
-      font-size: 12px;
-      color: #7c887f;
-    }
-
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .tool-card {
-      padding: 23px;
-      transition: .2s;
-    }
-
-    .tool-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-2px);
-    }
-
-    .tool-icon {
-      width: 43px;
-      height: 43px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: #e9eee5;
-      font-size: 21px;
-      margin-bottom: 17px;
-    }
-
-    .tool-card h4 {
-      font-family: Georgia, serif;
-      font-size: 19px;
-      font-weight: 500;
-      margin-bottom: 9px;
-    }
-
-    .tool-card p {
-      color: #7d887e;
-      font-size: 13px;
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-      animation: appear .25s ease;
-    }
-
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .panel {
-      padding: 23px;
-      margin-bottom: 18px;
-    }
-
-    .panel h3 {
-      font-family: Georgia, serif;
-      font-size: 22px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-
-    .panel > p {
-      color: #7d887e;
-      font-size: 13px;
-      line-height: 1.7;
-      margin-bottom: 18px;
-    }
-
-    .field {
-      margin: 16px 0;
-    }
-
-    .field label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .field input,
-    .field textarea,
-    .field select {
-      width: 100%;
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--green);
-      border-radius: 9px;
-      padding: 12px;
-      outline: none;
-    }
-
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
-      border-color: var(--gold);
-    }
-
-    .field textarea {
-      resize: vertical;
-      min-height: 115px;
-      line-height: 1.6;
-    }
-
-    .items {
-      display: grid;
-      gap: 12px;
-    }
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-      padding: 16px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-    }
-
-    .item h4 {
-      font-size: 14px;
-      margin-bottom: 6px;
-      overflow-wrap: anywhere;
-    }
-
-    .item p {
-      color: #7d887e;
-      font-size: 12px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
-
-    .delete-btn {
-      background: transparent;
-      border: 1px solid #e6d6ce;
-      color: #9c5948;
-      padding: 7px 10px;
-      flex-shrink: 0;
-    }
-
-    .empty {
-      color: #899187;
-      font-size: 13px;
-      padding: 18px 0;
-    }
-
-    .notice {
-      padding: 13px 15px;
-      background: #edf1e8;
-      color: #345443;
-      border-radius: 9px;
-      font-size: 12px;
-      line-height: 1.7;
-      margin-top: 15px;
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      margin-top: 45px;
-      padding: 20px 0;
-      color: #889187;
-      font-size: 11px;
-      text-align: center;
-      letter-spacing: 1px;
-    }
-
-    @media (max-width: 760px) {
-      .layout {
-        display: block;
-      }
-
-      aside {
-        width: 100%;
-        padding: 17px 14px;
-      }
-
-      .brand {
-        padding: 3px 8px 15px;
-      }
-
-      .brand h1 {
-        font-size: 22px;
-      }
-
-      .brand p {
-        font-size: 9px;
-      }
-
-      .nav-label, .sidebar-note {
-        display: none;
-      }
-
-      nav {
-        display: flex;
-        gap: 5px;
-        overflow-x: auto;
-        padding-bottom: 3px;
-      }
-
-      .nav-btn {
-        white-space: nowrap;
-        padding: 10px 12px;
-        font-size: 12px;
-      }
-
-      main {
-        padding: 23px 15px;
-      }
-
-      .topbar {
-        margin-bottom: 22px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .stat {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding: 15px;
-      }
-
-      .stat .symbol {
-        font-size: 25px;
-      }
-
-      .stat h3 {
-        font-size: 23px;
-        margin: 0 0 4px;
-      }
-
-      .tools-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero:after {
-        right: -30px;
-        font-size: 150px;
-      }
-    }
-  </style>
-  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KREOVANTA | Creative Workspace</title>
+<meta name="description" content="KREOVANTA: one studio for video, design, clip art and planning.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap">
 <style>
-/* KREOVANTA — Champagne, Ivory & Gold */
-:root {
-  --ivory: #FAF7F1;
-  --champagne: #E8D5B7;
-  --gold: #B8955A;
-  --espresso: #302820;
-  --muted: #776E63;
-  --white: #FFFFFF;
+:root{
+  --bg:#f7f1e3; --bg2:#efe6d0; --card:#fffaf0; --text:#12362b; --muted:#4f6258;
+  --gold:#b48a2c; --gold-text:#8a6a1c; --line:rgba(18,54,43,.16); --btn-text:#fffaf0; --ink:#12362b;
+  --blush:#f2d6c9; --sage:#cfdcc8; --butter:#f1e3b0; --lav:#ddd3ea; --terra:#d98f6b;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-
-html {
-  scroll-behavior: smooth;
+:root[data-theme="dark"]{
+  --bg:#0c2420; --bg2:#102d25; --card:#143629; --text:#f3ecd9; --muted:#b9c2b4;
+  --gold:#c9a24a; --gold-text:#d9b565; --line:rgba(201,162,74,.28); --btn-text:#0c2420; --ink:#12362b;
 }
-
-body {
-  background: var(--ivory);
-  color: var(--espresso);
-  font-family: "Georgia", "Times New Roman", serif;
-  line-height: 1.7;
-}
-
-h1, h2, h3, h4 {
-  color: var(--espresso);
-  line-height: 1.2;
-  letter-spacing: -0.035em;
-}
-
-p {
-  color: var(--muted);
-}
-
-a {
-  color: #8B6A38;
-  transition: color 0.25s ease;
-}
-
-a:hover {
-  color: var(--espresso);
-}
-
-button, .button, a.button,
-[role="button"] {
-  border-radius: 999px;
-  transition: all 0.25s ease;
-}
-
-button:hover, .button:hover,
-a.button:hover {
-  transform: translateY(-2px);
-}
-
-section {
-  padding-top: 48px;
-  padding-bottom: 48px;
-}
-
-article, .card, .feature-card,
-.product-card {
-  border: 1px solid rgba(184, 149, 90, 0.25);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(48, 40, 32, 0.06);
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-::selection {
-  background: var(--champagne);
-  color: var(--espresso);
-}
-
-@media (max-width: 600px) {
-  section {
-    padding-top: 32px;
-    padding-bottom: 32px;
-  }
-
-  h1 {
-    font-size: clamp(2rem, 9vw, 3.5rem);
-  }
-}
-  
-/* Front-page readability and luxury colour fixes */
-aside {
-  background: #302820;
-}
-
-.hero {
-  background: linear-gradient(135deg, #302820, #51402D);
-}
-
-.hero h2,
-.hero p {
-  color: #FFFFFF;
-}
-
-.hero .eyebrow {
-  color: #E8D5B7;
-}
-
-.brand h1 {
-  color: #D6B778;
-}
-
-.nav-btn {
-  color: #FFFFFF;
-}
-
-.nav-btn:hover,
-.nav-btn.active {
-  color: #F1D7A4;
-}
-
-.tool-card p,
-.stat p,
-.panel > p,
-.item p,
-.date,
-.section-heading span,
-.empty,
-footer {
-  color: #5F554A;
-}
-
-.tool-icon {
-  background: #F1E5D2;
-  color: #6D4F24;
-}
-
-.profile {
-  background: #302820;
-  color: #D6B778;
-}
-
-/* Luxury champagne and gold buttons */
-.primary {
-  background: linear-gradient(135deg, #E8D5B7, #D6B778);
-  color: #302820;
-  border: 1px solid #B8955A;
-  border-radius: 999px;
-  padding: 13px 22px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  box-shadow: 0 4px 12px rgba(48, 40, 32, 0.12);
-}
-
-.primary:hover {
-  background: linear-gradient(135deg, #F4E7D0, #E8D5B7);
-  box-shadow: 0 6px 16px rgba(48, 40, 32, 0.18);
-}
-
-.secondary {
-  background: #FFFFFF;
-  color: #5F4525;
-  border: 1px solid #D6B778;
-  border-radius: 999px;
-  padding: 12px 20px;
-  font-weight: 500;
-}
-
-.secondary:hover {
-  background: #F1E5D2;
-  border-color: #B8955A;
-}
-
-/* Luxury ivory cards with champagne-gold details */
-.tool-card,
-.stat,
-.panel {
-  background: linear-gradient(145deg, #FFFFFF, #FAF7F1);
-  border: 1px solid #E2CFAD;
-  border-radius: 18px;
-  box-shadow: 0 8px 24px rgba(48, 40, 32, 0.07);
-  transition: all 0.3s ease;
-}
-
-.tool-card {
-  padding: 26px;
-}
-
-.tool-card:hover {
-  border-color: #B8955A;
-  box-shadow: 0 12px 30px rgba(48, 40, 32, 0.13);
-  transform: translateY(-4px);
-}
-
-.tool-icon {
-  background: linear-gradient(135deg, #F5EBDD, #E8D5B7);
-  color: #6D4F24;
-  border: 1px solid #E2CFAD;
-  border-radius: 14px;
-}
-
-.stat,
-.panel {
-  padding: 24px;
-}
-
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6;transition:background .3s,color .3s;overflow-x:hidden}
+.serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 20px;background:var(--bg);border-bottom:1px solid var(--line)}
+.logo{letter-spacing:.3em;font-size:15px;color:var(--gold-text)}
+.links{display:none;gap:22px;font-size:14px}
+.links a{color:var(--text);text-decoration:none}
+@media(min-width:760px){.links{display:flex}}
+.pill{border:1px solid var(--gold);color:var(--gold-text);background:none;padding:6px 14px;border-radius:99px;font-size:12px;cursor:pointer;font-family:inherit}
+.btn{display:inline-block;background:var(--ink);color:#fffaf0;padding:13px 26px;border-radius:99px;text-decoration:none;font-size:14px;font-weight:500;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.gold{background:var(--gold)}
+.btn.ghost{background:none;color:var(--text);border:1px solid var(--line);margin-left:8px}
+section{padding:56px 20px;max-width:1040px;margin:0 auto}
+.eyebrow{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-text);margin:0 0 12px}
+h1{font-size:clamp(42px,10vw,78px);line-height:1;margin:0 0 16px;font-weight:500}
+h1 em{color:var(--gold-text);font-style:italic}
+h2{font-size:clamp(28px,6vw,42px);margin:0 0 8px;font-weight:500;line-height:1.1}
+.lead{color:var(--muted);max-width:540px}
+.hero{display:grid;gap:34px;align-items:center}
+@media(min-width:860px){.hero{grid-template-columns:1.05fr .95fr}}
+.stack{position:relative;height:340px}
+.fc{position:absolute;border-radius:18px;padding:14px;box-shadow:0 14px 30px rgba(18,54,43,.14);animation:fl 6s ease-in-out infinite}
+.fc small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;opacity:.75}
+.fc.a{left:0;top:10px;width:58%;height:190px;background:var(--blush);transform:rotate(-4deg)}
+.fc.b{right:0;top:0;width:50%;height:150px;background:var(--ink);color:#f3ecd9;transform:rotate(3deg);animation-delay:-2s}
+.fc.c{right:6%;bottom:6px;width:56%;height:150px;background:var(--butter);transform:rotate(-2deg);animation-delay:-4s}
+.fc.d{left:4%;bottom:0;width:36%;height:110px;background:var(--sage);transform:rotate(5deg);animation-delay:-1s}
+@keyframes fl{50%{translate:0 -10px}}
+.shape{position:absolute;border-radius:50%;background:var(--terra)}
+.bars{display:flex;gap:4px;margin-top:12px;align-items:end;height:60px}
+.bars i{flex:1;background:var(--gold);border-radius:3px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 14px}
+.tab{border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 18px;border-radius:99px;cursor:pointer;font-size:14px;font-family:inherit}
+.tab.on{background:var(--ink);color:#fffaf0;border-color:var(--ink)}
+.tabbody{min-height:92px;color:var(--muted)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tags span{background:var(--bg2);border-radius:99px;padding:5px 12px;font-size:13px;color:var(--text)}
+.band{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:26px}
+.card{border-radius:20px;padding:22px;transition:transform .25s}
+.card:hover{transform:translateY(-6px) rotate(-.6deg)}
+.card h3{font-size:26px;margin:6px 0 4px;font-weight:500;color:var(--ink)}
+.card p{margin:0;font-size:14px;color:#2f4a3f}
+.card .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#2f4a3f;font-weight:600}
+.card a{display:inline-block;margin-top:12px;color:var(--ink);font-size:13px;font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--ink)}
+.mason{columns:2;column-gap:12px;margin-top:24px}
+@media(min-width:760px){.mason{columns:4}}
+.tile{break-inside:avoid;margin-bottom:12px;border-radius:16px;padding:14px;display:flex;align-items:flex-end;font-size:13px;font-weight:500;color:var(--ink);transition:transform .25s}
+.tile:hover{transform:scale(1.03)}
+.studio{display:grid;gap:16px;margin-top:26px}
+@media(min-width:860px){.studio{grid-template-columns:1.3fr 1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px}
+.panel h4{margin:0 0 12px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-text);font-weight:600}
+.screen{background:var(--ink);border-radius:14px;height:150px;display:grid;place-items:center;color:#f3ecd9;font-size:34px;margin-bottom:12px}
+.track{height:22px;border-radius:6px;margin:6px 0;position:relative;background:var(--bg2)}
+.track b{position:absolute;top:0;bottom:0;border-radius:6px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{background:var(--bg2);border-radius:10px;padding:6px 4px;text-align:center;font-size:11px;min-height:86px}
+.day i{display:block;height:14px;border-radius:5px;margin-top:5px}
+.rep{display:grid;gap:18px;margin-top:24px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px}
+.seed{font-size:28px;line-height:1.15;color:var(--ink);border-left:3px solid var(--gold);padding-left:14px}
+.outs{display:flex;flex-wrap:wrap;gap:10px}
+.outs span{padding:10px 18px;border-radius:99px;font-size:14px;font-weight:500;color:var(--ink);transition:transform .2s}
+.outs span:hover{transform:translateY(-3px)}
+.ask{display:flex;gap:8px;margin:22px 0 12px;flex-wrap:wrap}
+.ask input{flex:1;min-width:200px;width:auto}
+.steps{display:grid;gap:6px;margin-bottom:6px}
+.steps div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 14px;font-size:14px;animation:pop .4s both}
+@keyframes pop{from{opacity:0;translate:0 8px}}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0}
+.dt{border-radius:20px;padding:18px 16px;transition:transform .25s;color:var(--ink)}
+.dt:hover{transform:translateY(-5px)}
+.dt b{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.55);font-size:18px;margin-bottom:10px;font-weight:400}
+.dt h3{font-size:22px;margin:0;font-weight:500;line-height:1.1}
+.dt p{margin:4px 0 0;font-size:13px;color:#2f4a3f}
+.ca{display:grid;gap:16px;margin-top:24px}
+@media(min-width:860px){.ca{grid-template-columns:1.4fr 1fr}}
+.search{width:100%;padding:11px 16px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:inherit;font-size:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.chips button{border:1px solid var(--line);background:var(--bg2);color:var(--text);padding:6px 14px;border-radius:99px;font:inherit;font-size:13px;cursor:pointer}
+.chips button.on{background:var(--ink);color:#fffaf0;border-color:var(--ink)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+.ct{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}
+.ct .g{font-size:46px;line-height:1.1}
+.ct small{display:block;color:var(--muted);font-size:12px}
+.ta{display:flex;gap:6px;justify-content:center;margin-top:6px}
+.ta button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:99px;padding:3px 10px;font:inherit;font-size:12px;cursor:pointer}
+.canvas{position:relative;height:230px;border-radius:14px;border:1px dashed var(--gold);background:repeating-conic-gradient(var(--bg2) 0 25%,var(--card) 0 50%) 0 0/20px 20px;overflow:hidden}
+.canvas .hint{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;color:var(--muted);text-align:center;padding:10px}
+.canvas .pl{position:absolute;font-size:46px;line-height:1;cursor:pointer}
+.acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.cta{text-align:center;background:var(--ink);color:#f3ecd9;border-radius:28px;padding:48px 20px}
+.cta h2{color:#f3ecd9}
+footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;letter-spacing:.25em}
+.note{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
+.oc{border-radius:16px;padding:14px;color:var(--ink);flex:1 1 220px}.oc b{font-size:12px;letter-spacing:.16em;text-transform:uppercase}.oc p{margin:6px 0 0;font-size:14px}
+.outs2{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:flex-start}
+.canvas:empty::before{content:'Tap + Add on any clip art, drag to move, double-tap to remove';position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:14px;font-size:13px;color:var(--muted)}
+.pl{touch-action:none;user-select:none}.pl.tx{font-size:26px;font-family:"Cormorant Garamond",Georgia,serif;white-space:nowrap}
+.sw{width:42px;height:42px;border:0;border-radius:50%;padding:0;background:none;cursor:pointer}
+.frm{display:grid;gap:10px;margin:14px 0}textarea.search{border-radius:14px;resize:vertical}
+.li{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.day u{display:block;font-size:10px;text-decoration:none;border-radius:5px;padding:2px 4px;margin-top:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:var(--ink)}
+.soon{display:inline-block;margin-top:6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-style:normal;background:rgba(255,255,255,.6);padding:2px 8px;border-radius:99px}
+@media print{body.pr>*:not(#clipart){display:none!important}body.pr .ca>.panel:first-child,body.pr .acts,body.pr #tx,body.pr #clipart .lead,body.pr #clipart h2,body.pr #clipart .eyebrow{display:none!important}body.pr .canvas{background:#fff;border:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;height:90vh}body.pr .panel{border:0}}
+@media(prefers-reduced-motion:reduce){.fc{animation:none}html{scroll-behavior:auto}}
 </style>
-<h3>Your Creative Dashboard</h3>
 </head>
-
 <body>
-<div class="layout">
-  <aside>
-    <div class="brand">
-      <h1>KREOVANTA</h1>
-      <p>CREATE YOUR NEXT</p>
+<nav>
+  <span class="logo serif">KREOVANTA</span>
+  <div class="links"><a href="#dash">Dashboard</a><a href="#create">Studio</a><a href="#clipart">Clip art</a><a href="#repurpose">Repurpose</a><a href="#boards">Ideas</a><a href="#plan">Plan</a></div>
+  <span><button class="pill" id="t" type="button">Emerald mode</button></span>
+</nav>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Your all-in-one creator studio</p>
+    <h1 class="serif">Edit it. Design it. <em>Plan it.</em> Post it.</h1>
+    <p class="lead">One studio for video, design and planning, built for every digital creator.</p>
+    <p style="margin-top:24px"><a class="btn gold" href="#create">Start creating</a><a class="btn ghost" href="#studio">See the studio</a></p>
+  </div>
+  <div class="stack" aria-hidden="true">
+    <div class="fc a"><small>Design</small><div class="shape" style="width:70px;height:70px;left:18px;top:60px"></div><div class="shape" style="width:46px;height:46px;right:20px;bottom:18px;background:var(--ink)"></div></div>
+    <div class="fc b"><small>Video</small><div class="bars"><i style="height:30%"></i><i style="height:70%"></i><i style="height:45%"></i><i style="height:90%"></i><i style="height:55%"></i><i style="height:75%"></i></div></div>
+    <div class="fc c"><small>Plan</small><p class="serif" style="font-size:26px;margin:6px 0 0;line-height:1.1">Friday<br>Launch reel</p></div>
+    <div class="fc d"><small>AI ideas</small></div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <p class="eyebrow">Made for</p>
+  <div class="tabs" id="tabs">
+    <button class="tab on" data-k="0" type="button">Creators</button>
+    <button class="tab" data-k="1" type="button">Businesses</button>
+    <button class="tab" data-k="2" type="button">Planners</button>
+  </div>
+  <div class="tabbody" id="tb"></div>
+</section>
+
+<section id="dash">
+  <p class="eyebrow">Your creative world</p>
+  <h2 class="serif">What would you like to create today?</h2>
+  <p class="lead">Imagine more. Create beautifully. Build your vision.</p>
+  <div class="ask"><input class="search" id="ai" value="Help me create a 30-day self-care journal" aria-label="Ask the AI Creator"><button class="btn gold" id="go" type="button" style="margin:0;border:0;cursor:pointer">Create ✦</button></div>
+  <div class="steps" id="st"></div>
+  <div class="dgrid">
+    <div class="dt" style="background:var(--blush)"><b>✦</b><h3 class="serif">AI Creator</h3><p>Turn ideas into products</p></div>
+    <div class="dt" style="background:var(--butter)"><b>✎</b><h3 class="serif">Design Studio</h3><p>Design and customise</p></div>
+    <div class="dt" style="background:var(--lav)"><b>❀</b><h3 class="serif">Creative Library</h3><p>Clip art and templates</p></div>
+    <div class="dt" style="background:var(--sage)"><b>▦</b><h3 class="serif">Planner Studio</h3><p>Organise life and work</p></div>
+    <div class="dt" style="background:#c9dde0"><b>▤</b><h3 class="serif">Book Builder</h3><p>Create e-books and PDFs</p><i class="soon">Coming soon</i></div>
+    <div class="dt" style="background:var(--terra)"><b>◈</b><h3 class="serif">Product Business</h3><p>Prepare and manage products</p><i class="soon">Coming soon</i></div>
+  </div>
+  <p class="eyebrow" style="margin-top:26px">And more inside</p>
+  <div class="tags"><span>Templates</span><span>Brand kit</span><span>PDF export</span><span>Product mockups</span><span>Creative Vault</span><span>Education resources</span><span>Palette and fonts</span><span>Backgrounds and patterns</span><span>Bundle builder</span><span>Creator community</span></div>
+</section>
+
+<div class="band" id="create"><section>
+  <p class="eyebrow">Your studio</p>
+  <h2 class="serif">Four creative rooms, one account.</h2>
+  <div class="grid">
+    <div class="card" style="background:var(--blush)"><span class="k">Design Studio</span><h3 class="serif">Make it beautiful</h3><p>Posts, logos, posters, thumbnails and printable PDFs from templates, fonts and shapes.</p><a href="#studio">Open studio</a></div>
+    <div class="card" style="background:var(--butter)"><span class="k">Video Studio</span><h3 class="serif">Cut it, caption it</h3><p>Edit Reels, Shorts and TikToks with captions, voiceovers, music and effects.</p><a href="#studio">Start a video</a></div>
+    <div class="card" style="background:var(--lav)"><span class="k">AI Creator Assistant</span><h3 class="serif">Never get stuck</h3><p>Generate ideas, hooks, captions and content outlines in seconds.</p><a href="#repurpose">Try the assistant</a></div>
+    <div class="card" style="background:var(--sage)"><span class="k">Content Planner</span><h3 class="serif">Plan the week</h3><p>Plan posts, scripts and publishing dates in one calendar.</p><a href="#plan">Plan content</a></div>
+    <div class="card" style="background:#c9dde0"><span class="k">Clip Art Studio</span><h3 class="serif">Browse, save, place</h3><p>A library of illustrations to download or drop straight into your designs.</p><a href="#clipart">Browse clip art</a></div>
+  </div>
+</section></div>
+
+<section id="clipart">
+  <p class="eyebrow">New · Clip Art Studio</p>
+  <h2 class="serif">A library and a design tool, in one.</h2>
+  <p class="lead">Browse illustrations, save your favourites, download transparent PNGs, or add them straight onto your design.</p>
+  <div class="ca">
+    <div class="panel">
+      <input class="search" id="q" placeholder="Search clip art" aria-label="Search clip art">
+      <div class="chips" id="chips"></div>
+      <div class="cgrid" id="cg"></div>
     </div>
-
-    <div class="nav-label">WORKSPACE</div>
-    <nav>
-      <button class="nav-btn active" data-page="home">⌂ Overview</button>
-      <button class="nav-btn" data-page="design">✧ Design Studio</button>
-      <button class="nav-btn" data-page="video">▷ Video Studio</button>
-      <button class="nav-btn" data-page="planner">▦ Content Planner</button>
-      <button class="nav-btn" data-page="ideas">✎ Idea Shelf</button>
-    </nav>
-
-    <div class="sidebar-note">
-      Your ideas deserve a beautiful place to grow.<br>
-      <span style="color:var(--gold)">Imagine. Create. Elevate.</span>
+    <div class="panel"><h4>My design</h4>
+      <div class="canvas" id="cv"></div>
+      <input class="search" id="tx" placeholder="Type text to add" aria-label="Text to add" style="margin-top:12px"><div class="acts"><button class="pill" id="at" type="button">Add text</button><button class="pill" id="un" type="button">Undo</button><button class="pill" id="clr" type="button">Clear</button><button class="pill" id="dl" type="button">Download PNG</button><button class="pill" id="pd" type="button">Export PDF</button></div>
+      <p style="font-size:13px;color:var(--muted);margin:10px 0 0">My favourites: <b id="fc">0</b></p>
     </div>
-  </aside>
+  </div>
+</section>
 
-  <main>
-    <header class="topbar">
-      <div>
-        <div class="eyebrow">YOUR CREATIVE SPACE</div>
-        <h2 id="page-title">Welcome to your studio.</h2>
-        <p class="date" id="today"></p>
-      </div>
-      <div class="profile">K</div>
-    </header>
+<section id="repurpose">
+  <p class="eyebrow">Signature feature</p>
+  <h2 class="serif">Create once, repurpose everywhere.</h2>
+  <p class="lead">Start with a single idea and turn it into everything you need to post.</p>
+  <div class="rep"><div class="ask" style="margin:0"><input class="search" id="ri" value="5 budget-friendly morning routines" aria-label="Your idea"><button class="btn gold" id="rb" type="button" style="margin:0;border:0;cursor:pointer">Repurpose</button></div><div class="outs2" id="ro"></div></div>
+</section>
 
-    <section class="page active" id="home">
-      <div class="hero">
-        <div class="eyebrow">A NEW KIND OF CREATIVE WORKSPACE</div>
-        <h2>Turn your ideas into something extraordinary.</h2>
-        <h2>Welcome to KREOVANTA</h2>
-  <p>
-  Your ideas deserve an extraordinary space. Organise your vision,
-  plan your next move and turn creative possibilities into meaningful progress.
-</p>
-          
-        
-        <button class="primary" data-go="ideas">Bring Your Ideas to Life ↗</button>
-     
-      <div class="section-heading">
-        <h3>Your Creative Dashboard</h3>
-        <span>A curated view of your creative world</span>
-      </div>
+<section id="boards">
+  <p class="eyebrow">Creator command centre</p>
+  <h2 class="serif">Ideas, scripts and drafts, all together.</h2>
+  <div class="mason" id="m"></div>
+</section>
 
-      <div class="stats">
-        <div class="stat">
-          <div class="symbol">✧</div>
-          <div>
-            <h3 id="idea-count">0</h3>
-            <p>Saved ideas</p>
-          </div>
-        </div>
-        <div class="stat">
-          <div class="symbol">▦</div>
-          <div>
-            <h3 id="plan-count">0</h3>
-            <p>Planned posts</p>
-          </div>
-        </div>
-        <div class="stat">
-          <div class="symbol">◷</div>
-          <div>
-            <h3 id="draft-count">0</h3>
-            <p>Creative drafts</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="section-heading">
-        <h3>Explore your studio</h3>
-        <span>Choose where to begin</span>
-      </div>
-
-      <div class="tools-grid">
-        <article class="tool-card">
-          <div class="tool-icon">✧</div>
-          <h4>Design Studio</h4>
-          <p>Write down design concepts, visual directions and project briefs.</p>
-          <button class="secondary" data-go="design">Open studio →</button>
-        </article>
-
-        <article class="tool-card">
-          <div class="tool-icon">▷</div>
-          <h4>Video Studio</h4>
-          <p>Develop video concepts, hooks, scripts and creative outlines.</p>
-          <button class="secondary" data-go="video">Build a concept →</button>
-        </article>
-
-        <article class="tool-card">
-          <div class="tool-icon">▦</div>
-          <h4>Content Planner</h4>
-          <p>Organise your upcoming posts and keep track of your content ideas.</p>
-          <button class="secondary" data-go="planner">Plan content →</button>
-        </article>
-
-        <article class="tool-card">
-          <div class="tool-icon">✎</div>
-          <h4>Idea Shelf</h4>
-          <p>Save your inspiration so your next great idea is never lost.</p>
-          <button class="secondary" data-go="ideas">Save an idea →</button>
-        </article>
-      </div>
-    </section>
-
-    <section class="page" id="design">
-      <div class="panel">
-        <h3>Design Studio</h3>
-        <p>Build a brief for your next creative project. Save your work in this browser.</p>
-
-        <form id="design-form">
-          <div class="field">
-            <label for="design-title">Project name</label>
-            <input id="design-title" required placeholder="e.g. A luxury brand identity">
-          </div>
-          <div class="field">
-            <label for="design-type">Project type</label>
-            <select id="design-type">
-              <option>Brand identity</option>
-              <option>Social media graphics</option>
-              <option>Digital product</option>
-              <option>Website concept</option>
-              <option>Marketing design</option>
-              <option>Other creative project</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="design-notes">Creative direction</label>
-            <textarea id="design-notes" placeholder="Describe the mood, colours, audience and details you envision..."></textarea>
-          </div>
-          <button class="primary" type="submit">Save design brief</button>
-        </form>
-      </div>
-      <div class="section-heading"><h3>Your design drafts</h3></div>
-      <div class="items" id="design-items"></div>
-    </section>
-
-    <section class="page" id="video">
-      <div class="panel">
-        <h3>Video Studio</h3>
-        <p>Organise your video concepts and prepare scripts before production.</p>
-
-        <form id="video-form">
-          <div class="field">
-            <label for="video-title">Video title</label>
-            <input id="video-title" required placeholder="e.g. Five creative habits">
-          </div>
-          <div class="field">
-            <label for="video-platform">Platform</label>
-            <select id="video-platform">
-              <option>YouTube</option>
-              <option>TikTok</option>
-              <option>Instagram Reels</option>
-              <option>Facebook</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="video-script">Hook, outline or script</label>
-            <textarea id="video-script" placeholder="Opening hook, main points, scenes and ending..."></textarea>
-          </div>
-          <button class="primary" type="submit">Save video concept</button>
-        </form>
-      </div>
-      <div class="section-heading"><h3>Your video drafts</h3></div>
-      <div class="items" id="video-items"></div>
-    </section>
-
-    <section class="page" id="planner">
-      <div class="panel">
-        <h3>Content Planner</h3>
-        <p>Plan a post, assign a date and keep your content organised.</p>
-
-        <form id="planner-form">
-          <div class="field">
-            <label for="post-title">Post or campaign title</label>
-            <input id="post-title" required placeholder="e.g. Monday inspiration">
-          </div>
-          <div class="field">
-            <label for="post-date">Publish date</label>
-            <input id="post-date" type="date" required>
-          </div>
-          <div class="field">
-            <label for="post-platform">Platform</label>
-            <select id="post-platform">
-              <option>Instagram</option>
-              <option>YouTube</option>
-              <option>TikTok</option>
-              <option>Pinterest</option>
-              <option>Facebook</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="post-notes">Caption or notes</label>
-            <textarea id="post-notes" placeholder="What will you share? Add a caption or reminder..."></textarea>
-          </div>
-          <button class="primary" type="submit">Add to planner</button>
-        </form>
-      </div>
-      <div class="section-heading"><h3>Your planned content</h3></div>
-      <div class="items" id="planner-items"></div>
-    </section>
-
-    <section class="page" id="ideas">
-      <div class="panel">
-        <h3>Idea Shelf</h3>
-        <p>Collect the ideas, inspirations and possibilities you want to explore.</p>
-
-        <form id="ideas-form">
-          <div class="field">
-            <label for="idea-title">Idea title</label>
-            <input id="idea-title" required placeholder="Give your idea a name">
-          </div>
-          <div class="field">
-            <label for="idea-category">Category</label>
-            <select id="idea-category">
-              <option>Business</option>
-              <option>Content</option>
-              <option>Design</option>
-              <option>Digital product</option>
-              <option>Personal project</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="idea-notes">Your notes</label>
-            <textarea id="idea-notes" placeholder="Write down everything you want to remember..."></textarea>
-          </div>
-          <button class="primary" type="submit">Save my idea</button>
-        </form>
-      </div>
-      <div class="section-heading"><h3>Your saved ideas</h3></div>
-      <div class="items" id="idea-items"></div>
-    </section>
-
-    <div class="notice">
-      Your workspace saves information in this browser on this device.
-      This is an early version: it does not yet have user accounts,
-      cloud synchronisation, AI generation or automatic publishing.
-      Avoid clearing browser data if you want to keep your saved drafts.
+<div class="band" id="studio"><section>
+  <p class="eyebrow">Inside the studio</p>
+  <h2 class="serif">Edit videos and designs side by side.</h2>
+  <div class="studio">
+    <div class="panel"><h4>Video timeline · coming soon</h4>
+      <div class="screen">▶</div>
+      <div class="track"><b style="left:0;width:38%;background:var(--terra)"></b><b style="left:40%;width:30%;background:var(--gold)"></b><b style="left:72%;width:26%;background:var(--sage)"></b></div>
+      <div class="track"><b style="left:8%;width:50%;background:var(--lav)"></b></div>
+      <div class="track"><b style="left:0;width:92%;background:var(--blush)"></b></div>
     </div>
+    <div class="panel"><h4>Brand kit</h4>
+      <div class="chips" id="sws" style="margin:0 0 14px"></div>
+      <input class="search" id="bn" aria-label="Brand name" placeholder="Brand name" style="margin-bottom:12px">
+      <p class="serif" id="bh" style="font-size:30px;margin:0;line-height:1.1">KREOVANTA</p>
+      <p style="margin:6px 0 0;font-size:14px;color:var(--muted)">Your colours save on this device, and new text on your design uses your first colour.</p>
+    </div>
+  </div>
+</section></div>
 
-    <footer>KREOVANTA · IMAGINE · CREATE · ELEVATE</footer>
-  </main>
-</div>
+<section id="plan">
+  <p class="eyebrow">Content planner</p>
+  <h2 class="serif">Plan your week.</h2>
+  <div class="panel" style="margin-top:24px"><div class="week" id="w"></div></div>
+  <div class="panel" style="margin-top:16px">
+    <div class="tabs" id="wt" style="margin-top:0"><button class="tab on" data-k="plan" type="button">Add a post</button><button class="tab" data-k="idea" type="button">Save an idea</button><button class="tab" data-k="brief" type="button">New brief</button></div>
+    <div class="frm" id="fm"></div>
+    <div id="lst"></div>
+  </div>
+</section>
+
+<section>
+  <div class="cta">
+    <h2 class="serif">Your whole creative world, in one place.</h2>
+    <p style="opacity:.8;margin:8px 0 22px">Imagine. Create. Elevate.</p>
+    <a class="btn gold" href="#dash">Start creating</a>
+  </div>
+  <p class="note">Early version: your work saves on this device. Accounts, cloud sync and live AI come next.</p>
+</section>
+<footer>KREOVANTA · IMAGINE · CREATE · ELEVATE</footer>
 
 <script>
-  const $ = id => document.getElementById(id);
-
-  const titles = {
-    home: "Welcome to your studio.",
-    design: "Design with intention.",
-    video: "Bring your stories to life.",
-    planner: "Make every post count.",
-    ideas: "Every great thing starts with an idea."
-  };
-
-  const storageKey = "kreovanta_workspace_v1";
-
-  let data = {
-    ideas: [],
-    plans: [],
-    designs: [],
-    videos: []
-  };
-
-  try {
-    const saved = localStorage.getItem(storageKey);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      data = { ...data, ...parsed };
-    }
-  } catch (error) {
-    console.warn("Saved workspace could not be loaded.", error);
-  }
-
-  function save() {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(data));
-    } catch (error) {
-      alert("Your browser could not save this change. Check your available storage.");
-    }
-    render();
-  }
-
-  function showPage(page) {
-    document.querySelectorAll(".page").forEach(el => {
-      el.classList.toggle("active", el.id === page);
-    });
-
-    document.querySelectorAll(".nav-btn").forEach(btn => {
-      btn.classList.toggle("active", btn.dataset.page === page);
-    });
-
-    $("page-title").textContent = titles[page] || titles.home;
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  document.querySelectorAll("[data-page]").forEach(btn => {
-    btn.addEventListener("click", () => showPage(btn.dataset.page));
+(function(){
+  function ld(k,d){try{return JSON.parse(localStorage.getItem('kv-'+k))||d}catch(e){return d}}
+  function sv(k,v){try{localStorage.setItem('kv-'+k,JSON.stringify(v))}catch(e){}}
+  var r=document.documentElement,b=document.getElementById('t');
+  b.addEventListener('click',function(){
+    var d=r.getAttribute('data-theme')==='dark';
+    if(d){r.removeAttribute('data-theme');b.textContent='Emerald mode';}
+    else{r.setAttribute('data-theme','dark');b.textContent='Cream mode';}
   });
-
-  document.querySelectorAll("[data-go]").forEach(btn => {
-    btn.addEventListener("click", () => showPage(btn.dataset.go));
+  var T=[
+    ['Turn ideas into scroll-stopping posts, reels and covers without juggling five apps.',['Reels','Thumbnails','Carousels']],
+    ['Keep your brand consistent across every ad, menu, flyer and social post.',['Brand kit','Promo posts','Team boards']],
+    ['Map out your month, batch your content and never miss a posting day.',['Calendars','Checklists','Reminders']]
+  ],tb=document.getElementById('tb');
+  function show(k){tb.innerHTML='<p style="margin:0">'+T[k][0]+'</p><div class="tags">'+T[k][1].map(function(x){return '<span>'+x+'</span>'}).join('')+'</div>';}
+  show(0);
+  document.getElementById('tabs').addEventListener('click',function(e){
+    var el=e.target.closest('.tab');if(!el)return;
+    document.querySelectorAll('#tabs .tab').forEach(function(x){x.classList.remove('on')});
+    el.classList.add('on');show(+el.dataset.k);
   });
+  var cs=['var(--blush)','var(--sage)','var(--butter)','var(--lav)','var(--terra)'];
+  function $(i){return document.getElementById(i)}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function iso(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+  var P={plan:ld('plan',[]),idea:ld('idea',[]),brief:ld('brief',[])},cur='plan';
+  function put(k,o){P[k].push(o);sv(k,P[k]);draw();}
+  var F={plan:[['Post title','text'],['Publish date','date'],['Platform',['Instagram','TikTok','YouTube','Pinterest','Facebook','Other']]],
+    idea:[['Idea title','text'],['Category',['Business','Content','Design','Digital product','Personal project','Other']],['Notes','area']],
+    brief:[['Project name','text'],['Type',['Design brief','Video concept','Script','Product plan']],['Notes','area']]};
+  function form(){$('fm').innerHTML=F[cur].map(function(f,i){var n=f[0],t=f[1];
+    if(t==='text'||t==='date')return '<input class="search" id="f'+i+'" type="'+t+'" placeholder="'+n+'" aria-label="'+n+'">';
+    if(t==='area')return '<textarea class="search" id="f'+i+'" rows="3" placeholder="'+n+'" aria-label="'+n+'"></textarea>';
+    return '<select class="search" id="f'+i+'" aria-label="'+n+'">'+t.map(function(o){return '<option>'+o+'</option>'}).join('')+'</select>';}).join('')+'<button class="btn gold" id="fsave" type="button" style="margin:0;border:0;cursor:pointer;justify-self:start">Save</button>';}
+  $('fm').addEventListener('click',function(e){if(e.target.id!=='fsave')return;var v=F[cur].map(function(f,i){return $('f'+i).value.trim()});if(!v[0])return;if(cur==='plan'&&!v[1])v[1]=iso(new Date());put(cur,{a:v[0],b:v[1],c:v[2]||'',id:Date.now()});form();});
+  $('wt').addEventListener('click',function(e){var t=e.target.closest('.tab');if(!t)return;cur=t.dataset.k;document.querySelectorAll('#wt .tab').forEach(function(x){x.classList.toggle('on',x===t)});form();list();});
+  $('lst').addEventListener('click',function(e){var d=e.target.dataset.d;if(!d)return;P[cur]=P[cur].filter(function(o){return String(o.id)!==d});sv(cur,P[cur]);draw();});
+  function list(){var a=P[cur].slice();if(cur==='plan')a.sort(function(x,y){return x.b<y.b?-1:1});
+    $('lst').innerHTML=a.length?a.map(function(o){return '<div class="li"><span><b>'+esc(o.a)+'</b><br><small style="color:var(--muted)">'+esc(o.b)+(o.c?' · '+esc(o.c):'')+'</small></span><button class="pill" type="button" data-d="'+o.id+'">Delete</button></div>'}).join(''):'<p style="color:var(--muted);font-size:14px;margin:6px 0 0">Nothing saved yet.</p>';}
+  function week(){var t=new Date(),m=new Date(t.getFullYear(),t.getMonth(),t.getDate()-((t.getDay()+6)%7)),D=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    $('w').innerHTML=D.map(function(d,i){var x=new Date(m.getFullYear(),m.getMonth(),m.getDate()+i),k=iso(x);
+      return '<div class="day"'+(k===iso(t)?' style="outline:2px solid var(--gold)"':'')+'><b>'+d+'</b><br>'+x.getDate()+P.plan.filter(function(o){return o.b===k}).map(function(o,j){return '<u style="background:'+cs[j%5]+'">'+esc(o.a)+'</u>'}).join('')+'</div>'}).join('');}
+  function board(){var a=P.idea.concat(P.brief),hs=[130,180,150,210,140];
+    $('m').innerHTML=a.length?a.map(function(o,i){return '<div class="tile" style="height:'+hs[i%5]+'px;background:'+cs[i%5]+'"><span>'+esc(o.a)+'<small style="display:block;font-weight:400;opacity:.7">'+esc(o.b)+'</small></span></div>'}).join(''):'<p style="color:var(--muted);font-size:14px;column-span:all">Ideas and briefs you save in the planner appear here as a board.</p>';}
+  function draw(){list();week();board();}
+  form();draw();
 
-  function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, char => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[char]);
-  }
+  var bk=ld('brand',['#12362b','#b48a2c','#f2d6c9','#cfdcc8']),bname=ld('bname','KREOVANTA');
+  $('sws').innerHTML=bk.map(function(c,i){return '<input class="sw" type="color" value="'+c+'" data-i="'+i+'" aria-label="Brand colour '+(i+1)+'">'}).join('');
+  $('sws').addEventListener('input',function(e){bk[+e.target.dataset.i]=e.target.value;sv('brand',bk);});
+  $('bn').value=bname;$('bh').textContent=bname;
+  $('bn').addEventListener('input',function(e){bname=e.target.value;$('bh').textContent=bname||'Your brand';sv('bname',bname);});
 
-  function drawItems(containerId, list, type) {
-    const container = $(containerId);
+  var C=[['Blossom','\u2740','Florals','#d98f6b'],['Daisy','\u273f','Florals','#b48a2c'],['Crescent','\u263e','Celestial','#6f9a7a'],['Star','\u2605','Celestial','#b48a2c'],['Sparkle','\u2726','Sparkles','#d98f6b'],['Heart','\u2661','Hearts','#c0647a'],['Diamond','\u2756','Sparkles','#6f9a7a'],['Sun','\u2600','Celestial','#d98f6b']],
+    K=['All','Florals','Celestial','Hearts','Sparkles','Favourites'],cat='All',fav=ld('fav',{}),cg=$('cg'),cv=$('cv'),qi=$('q'),ch=$('chips');
+  function chips(){ch.innerHTML=K.map(function(k){return '<button type="button" data-c="'+k+'"'+(k===cat?' class="on"':'')+'>'+k+'</button>'}).join('');}
+  function grid(){var s=qi.value.toLowerCase();cg.innerHTML=C.map(function(c,i){
+    if(s&&c[0].toLowerCase().indexOf(s)<0&&c[2].toLowerCase().indexOf(s)<0)return '';
+    if(cat==='Favourites'?!fav[i]:(cat!=='All'&&c[2]!==cat))return '';
+    return '<div class="ct"><div class="g" style="color:'+c[3]+'">'+c[1]+'</div><small>'+c[0]+'</small><div class="ta"><button type="button" data-f="'+i+'" aria-label="Favourite">'+(fav[i]?'\u2665':'\u2661')+'</button><button type="button" data-a="'+i+'">+ Add</button></div></div>'}).join('')||'<p style="grid-column:1/-1;color:var(--muted);font-size:14px">No clip art found.</p>';
+    $('fc').textContent=Object.keys(fav).length;}
+  function mk(t,col,l,tp,tx){var s=document.createElement('span');s.className='pl'+(tx?' tx':'');s.textContent=t;s.style.color=col;s.style.left=l+'%';s.style.top=tp+'%';cv.appendChild(s);}
+  function sd(){sv('design',[].map.call(cv.children,function(s){return [s.textContent,s.style.color,parseFloat(s.style.left),parseFloat(s.style.top),s.className.indexOf('tx')>0?1:0]}));}
+  ld('design',[]).forEach(function(a){mk(a[0],a[1],a[2],a[3],a[4])});
+  ch.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;cat=b.dataset.c;chips();grid();});
+  qi.addEventListener('input',grid);
+  cg.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    if(b.dataset.f!==undefined){var i=b.dataset.f;if(fav[i])delete fav[i];else fav[i]=1;sv('fav',fav);grid();}
+    else if(b.dataset.a!==undefined){var c=C[b.dataset.a];mk(c[1],c[3],8+Math.random()*72,6+Math.random()*60);sd();}});
+  $('at').addEventListener('click',function(){var t=$('tx').value.trim();if(!t)return;mk(t,bk[0],8+Math.random()*30,8+Math.random()*60,1);$('tx').value='';sd();});
+  $('un').addEventListener('click',function(){if(cv.lastChild)cv.lastChild.remove();sd();});
+  $('clr').addEventListener('click',function(){cv.innerHTML='';sd();});
+  var dr=null;
+  cv.addEventListener('pointerdown',function(e){var t=e.target;if(!t.classList.contains('pl'))return;dr={t:t,x:e.clientX,y:e.clientY,l:t.offsetLeft,p:t.offsetTop};t.setPointerCapture(e.pointerId);});
+  cv.addEventListener('pointermove',function(e){if(!dr)return;dr.t.style.left=(dr.l+e.clientX-dr.x)+'px';dr.t.style.top=(dr.p+e.clientY-dr.y)+'px';});
+  cv.addEventListener('pointerup',function(){if(!dr)return;dr.t.style.left=(dr.t.offsetLeft/cv.offsetWidth*100)+'%';dr.t.style.top=(dr.t.offsetTop/cv.offsetHeight*100)+'%';dr=null;sd();});
+  cv.addEventListener('dblclick',function(e){if(e.target.classList.contains('pl')){e.target.remove();sd();}});
+  var dl=$('dl');
+  dl.addEventListener('click',function(){
+    if(!cv.children.length){dl.textContent='Add something first';setTimeout(function(){dl.textContent='Download PNG'},1600);return;}
+    var r=cv.getBoundingClientRect(),k=2,c=document.createElement('canvas');c.width=r.width*k;c.height=r.height*k;var x=c.getContext('2d');x.scale(k,k);x.textBaseline='top';
+    [].forEach.call(cv.children,function(s){var b=s.getBoundingClientRect(),q=getComputedStyle(s);x.font=q.fontSize+' '+q.fontFamily;x.fillStyle=q.color;x.fillText(s.textContent,b.left-r.left,b.top-r.top);});
+    var a=document.createElement('a');a.download='kreovanta-design.png';a.href=c.toDataURL('image/png');a.click();});
+  $('pd').addEventListener('click',function(){document.body.classList.add('pr');window.print();});
+  window.addEventListener('afterprint',function(){document.body.classList.remove('pr')});
+  chips();grid();
 
-    if (!list.length) {
-      container.innerHTML = '<p class="empty">Nothing here yet. Create your first entry above.</p>';
-      return;
-    }
+  $('go').onclick=function(){var raw=$('ai').value.trim();if(!raw)return;
+    var core=raw.replace(/^(help me )?(create|make|build|design|write)( me)?( a| an| my)?\s+/i,'').replace(/[.?!]+$/,'')||raw,
+      T=core.replace(/(^|[\s-])([a-z])/g,function(m,a,b){return a+b.toUpperCase()}),
+      S=['Title ideas: '+T+' Made Simple, The Little '+T+', '+T+' for Busy Creators','Outline: Welcome, Goals, Core pages, Weekly reflections, Bonus pages, Closing','Starter prompts: What do I want more of? What did I finish? What can I let go of?','Layout: A5 portrait pages, wide margins, one theme per page','Palette: cream, forest green and champagne gold','Description: A beautifully simple '+core+' to help you stay inspired and organised.','Caption: New: '+core+'. Save it, share it, and tell me what you would add.'],st=$('st');
+    st.innerHTML='';
+    S.forEach(function(s,i){setTimeout(function(){var d=document.createElement('div');d.textContent=s;st.appendChild(d);
+      if(i===S.length-1){var b=document.createElement('button');b.className='pill';b.type='button';b.textContent='Save to my ideas';b.onclick=function(){put('idea',{a:T,b:'Digital product',c:'From AI Creator',id:Date.now()});b.textContent='Saved';};st.appendChild(b);
+        var n=document.createElement('p');n.className='note';n.style.textAlign='left';n.textContent='Starter drafts from built-in templates. A live AI model connects in the next stage.';st.appendChild(n);}},i*300);});};
 
-    container.innerHTML = list.map(item => `
-      <article class="item">
-        <div>
-          <h4>${escapeHTML(item.title)}</h4>
-          <p>${escapeHTML(item.meta || "")}${item.meta && item.notes ? " · " : ""}${escapeHTML(item.notes || "")}</p>
-        </div>
-        <button class="delete-btn" data-delete="${escapeHTML(item.id)}" data-type="${type}" aria-label="Delete ${escapeHTML(item.title)}">Delete</button>
-      </article>
-    `).join("");
-  }
+  $('rb').onclick=function(){var i=$('ri').value.trim();if(!i)return;var up=i.length>38?i.slice(0,38)+'\u2026':i,
+    O=[['Video script','Hook: '+i+', here is what actually works. Then: three quick points, one proof moment, and a clear call to action.'],['Social post','Save this for later: '+i+'. Which one will you try first? Tell me below.'],['Thumbnail','Big text: '+up.toUpperCase()+'. Cream background, gold underline, one clip art accent.'],['Caption',i+' Tap save and share it with a friend. #creator #contentplanning'],['Content plan','Mon film, Tue design thumbnail, Wed post video, Thu share a quote card, Fri recap story.']];
+    $('ro').innerHTML=O.map(function(o,j){return '<div class="oc" style="background:'+cs[j%5]+'"><b>'+o[0]+'</b><p>'+esc(o[1])+'</p></div>'}).join('')+'<button class="pill" id="rp" type="button">Add plan to my planner</button>';
+    $('rp').onclick=function(){var t=new Date(),L=['Film: ','Design thumbnail: ','Post video: ','Share quote card: ','Recap story: '];for(var k=0;k<5;k++)P.plan.push({a:L[k]+up,b:iso(new Date(t.getFullYear(),t.getMonth(),t.getDate()+k)),c:'Instagram',id:Date.now()+k});sv('plan',P.plan);draw();this.textContent='Added to planner';};};
+  $('rb').onclick();
 
-  function render() {
-    $("idea-count").textContent = data.ideas.length;
-    $("plan-count").textContent = data.plans.length;
-    $("draft-count").textContent = data.designs.length + data.videos.length;
+  [].forEach.call(document.querySelectorAll('.dt'),function(e,i){var g=['#dash','#clipart','#clipart','#plan'][i];if(g){e.style.cursor='pointer';e.onclick=function(){if(i===0)$('ai').focus();location.hash=g;};}});
 
-    drawItems("idea-items", data.ideas, "ideas");
-    drawItems("planner-items", data.plans, "plans");
-    drawItems("design-items", data.designs, "designs");
-    drawItems("video-items", data.videos, "videos");
-  }
-
-  document.addEventListener("click", event => {
-    const button = event.target.closest("[data-delete]");
-    if (!button) return;
-
-    const type = button.dataset.type;
-    const id = button.dataset.delete;
-
-    if (!Array.isArray(data[type])) return;
-
-    const entry = data[type].find(item => item.id === id);
-    if (!entry) return;
-
-    if (confirm(`Delete "${entry.title}"?`)) {
-      data[type] = data[type].filter(item => item.id !== id);
-      save();
-    }
-  });
-
-  function addEntry(type, title, meta, notes) {
-    data[type].unshift({
-      id: Date.now().toString() + Math.random().toString(36).slice(2, 8),
-      title: title.trim(),
-      meta: meta.trim(),
-      notes: notes.trim()
-    });
-    save();
-  }
-
-  $("design-form").addEventListener("submit", event => {
-    event.preventDefault();
-    addEntry(
-      "designs",
-      $("design-title").value,
-      $("design-type").value,
-      $("design-notes").value
-    );
-    event.target.reset();
-    alert("Your design brief has been saved.");
-  });
-
-  $("video-form").addEventListener("submit", event => {
-    event.preventDefault();
-    addEntry(
-      "videos",
-      $("video-title").value,
-      $("video-platform").value,
-      $("video-script").value
-    );
-    event.target.reset();
-    alert("Your video concept has been saved.");
-  });
-
-  $("planner-form").addEventListener("submit", event => {
-    event.preventDefault();
-    addEntry(
-      "plans",
-      $("post-title").value,
-      $("post-date").value + " · " + $("post-platform").value,
-      $("post-notes").value
-    );
-    event.target.reset();
-    alert("Your post has been added to the planner.");
-  });
-
-  $("ideas-form").addEventListener("submit", event => {
-    event.preventDefault();
-    addEntry(
-      "ideas",
-      $("idea-title").value,
-      $("idea-category").value,
-      $("idea-notes").value
-    );
-    event.target.reset();
-    alert("Your idea has been saved.");
-  });
-
-  $("today").textContent = new Intl.DateTimeFormat(undefined, {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  }).format(new Date());
-
-  render();
+})();
 </script>
 </body>
 </html>
-
