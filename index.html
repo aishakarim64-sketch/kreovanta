@@ -229,6 +229,17 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
     <button class="btn gold" type="button" style="margin-top:16px" onclick="document.getElementById('book-preview-title').textContent=document.getElementById('book-title').value||'Your Book Title';document.getElementById('book-preview-subtitle').textContent=document.getElementById('book-subtitle').value;document.getElementById('book-preview-content').textContent=document.getElementById('book-content').value||'Your page content will appear here.';document.getElementById('book-preview').style.display='block'">Preview my book</button>
 
     <div id="book-preview" style="display:none;margin-top:28px;padding:48px 32px;min-height:480px;background:linear-gradient(145deg,#fffaf0,#f7f1e3);border:1px solid #b48a2c;border-radius:4px;box-shadow:0 12px 35px rgba(18,54,43,.10);position:relative;overflow-wrap:anywhere">
+      
+<div id="book-cover-art" style="min-height:380px;padding:36px 24px;margin-bottom:32px;background:linear-gradient(145deg,#fffaf0,#f2e4cc);border:2px solid #b48a2c;outline:1px solid #b48a2c;outline-offset:-9px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;box-sizing:border-box">
+  <p style="font-size:10px;letter-spacing:3px;color:#8a6a1c">KREOVANTA · CREATIVE EDITION</p>
+  <div style="font-size:32px;color:#b48a2c;margin:20px 0">✧</div>
+  <h2 class="serif" id="book-cover-title" style="font-size:38px;line-height:1.15;color:#49382d;margin:8px 0">Your Book Title</h2>
+  <p id="book-cover-subtitle" style="font-size:15px;color:#786457;line-height:1.7;max-width:260px">Your subtitle goes here</p>
+  <div style="width:55px;height:1px;background:#b48a2c;margin:24px 0"></div>
+  <p style="font-size:10px;letter-spacing:2px;color:#8a6a1c">MADE WITH YOUR IMAGINATION</p>
+  <div style="font-size:22px;color:#c98f85;margin-top:18px">❋</div>
+</div>
+
       <p class="eyebrow">Book preview · Page 1</p>
       <h2 class="serif" id="book-preview-title">Your Book Title</h2>
       <p id="book-preview-subtitle" style="color:var(--muted)"></p>
@@ -461,6 +472,41 @@ window.bookAddPage = function() {
   bookRenderPage();
   document.getElementById('book-content').focus();
 };
+
+var coverTitle = document.getElementById('book-title');
+var coverSubtitle = document.getElementById('book-subtitle');
+var coverStyle = document.getElementById('book-cover-style');
+var coverArt = document.getElementById('book-cover-art');
+
+function updateBookCover() {
+  if (!coverArt || !coverTitle || !coverSubtitle || !coverStyle) return;
+
+  document.getElementById('book-cover-title').textContent =
+    coverTitle.value || 'Your Book Title';
+
+  document.getElementById('book-cover-subtitle').textContent =
+    coverSubtitle.value || 'Your subtitle goes here';
+
+  var styles = {
+    ivory: ['#fffaf0', '#f2e4cc', '#49382d', '#b48a2c'],
+    forest: ['#173d32', '#0c2922', '#fffaf0', '#d6b66a'],
+    blush: ['#f9e7e2', '#f2d6c9', '#63463f', '#b77c70'],
+    lavender: ['#eee8f6', '#ddd3ea', '#493d5b', '#a18ab7']
+  };
+
+  var colors = styles[coverStyle.value] || styles.ivory;
+  coverArt.style.background =
+    'linear-gradient(145deg,' + colors[0] + ',' + colors[1] + ')';
+  coverArt.style.color = colors[2];
+  coverArt.style.borderColor = colors[3];
+  document.getElementById('book-cover-title').style.color = colors[2];
+}
+
+if (coverTitle) coverTitle.addEventListener('input', updateBookCover);
+if (coverSubtitle) coverSubtitle.addEventListener('input', updateBookCover);
+if (coverStyle) coverStyle.addEventListener('change', updateBookCover);
+
+updateBookCover();
 
 })();
 </script>
