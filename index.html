@@ -366,8 +366,9 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
     $('ro').innerHTML=O.map(function(o,j){return '<div class="oc" style="background:'+cs[j%5]+'"><b>'+o[0]+'</b><p>'+esc(o[1])+'</p></div>'}).join('')+'<button class="pill" id="rp" type="button">Add plan to my planner</button>';
     $('rp').onclick=function(){var t=new Date(),L=['Film: ','Design thumbnail: ','Post video: ','Share quote card: ','Recap story: '];for(var k=0;k<5;k++)P.plan.push({a:L[k]+up,b:iso(new Date(t.getFullYear(),t.getMonth(),t.getDate()+k)),c:'Instagram',id:Date.now()+k});sv('plan',P.plan);draw();this.textContent='Added to planner';};};
   $('rb').onclick();
+ 
+[].forEach.call(document.querySelectorAll('.dt'),function(e,i){var g=e.getAttribute('data-target')||['#repurpose','#create','#clipart','#plan'][i];if(g){e.style.cursor='pointer';e.onclick=function(){location.hash=g;};}});
 
-  [].forEach.call(document.querySelectorAll('.dt'),function(e,i){var g=e.getAttribute('data-target')||['#dash','#clipart','#clipart','#plan'][i];if(g){e.style.cursor='pointer';e.onclick=function(){if(i===0)$('ai').focus();location.hash=g;};}});
 
 })();
 </script>
