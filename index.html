@@ -191,6 +191,32 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
   </div>
 </section></div>
 
+<section id="book-builder" style="scroll-margin-top:80px">
+  <p class="eyebrow">Your publishing studio</p>
+  <h2 class="serif">Book Builder</h2>
+  <p class="lead">Turn your ideas into beautiful e-books, journals and workbooks.</p>
+
+  <div class="panel" style="margin-top:24px">
+    <label for="book-title">Book title</label>
+    <input class="search" id="book-title" placeholder="e.g. My Self-Care Journal">
+
+    <label for="book-subtitle" style="display:block;margin-top:16px">Subtitle</label>
+    <input class="search" id="book-subtitle" placeholder="A little description of your book">
+
+    <label for="book-content" style="display:block;margin-top:16px">Page 1 content</label>
+    <textarea class="search" id="book-content" rows="8" placeholder="Start writing your first page here..." style="width:100%;resize:vertical"></textarea>
+
+    <button class="btn gold" type="button" style="margin-top:16px" onclick="document.getElementById('book-preview-title').textContent=document.getElementById('book-title').value||'Your Book Title';document.getElementById('book-preview-subtitle').textContent=document.getElementById('book-subtitle').value;document.getElementById('book-preview-content').textContent=document.getElementById('book-content').value||'Your page content will appear here.';document.getElementById('book-preview').style.display='block'">Preview my book</button>
+
+    <div id="book-preview" style="display:none;margin-top:24px;padding:28px;background:var(--card);border:1px solid var(--line);border-radius:12px">
+      <p class="eyebrow">Book preview · Page 1</p>
+      <h2 class="serif" id="book-preview-title">Your Book Title</h2>
+      <p id="book-preview-subtitle" style="color:var(--muted)"></p>
+      <div id="book-preview-content" style="white-space:pre-wrap;line-height:1.8;margin-top:20px"></div>
+    </div>
+  </div>
+</section>
+
 <section id="clipart">
   <p class="eyebrow">New · Clip Art Studio</p>
   <h2 class="serif">A library and a design tool, in one.</h2>
