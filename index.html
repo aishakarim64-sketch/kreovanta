@@ -408,7 +408,9 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
 
 var bookPages = [''];
 var bookCurrentPage = 0;
-
+document.getElementById('book-content').addEventListener('input', function() {
+  bookPages[bookCurrentPage] = this.value;
+});
 function bookSaveCurrent() {
   bookPages[bookCurrentPage] = document.getElementById('book-content').value;
 }
