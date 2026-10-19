@@ -164,7 +164,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
   <p class="eyebrow">Your creative world</p>
   <h2 class="serif">What would you like to create today?</h2>
   <p class="lead">Imagine more. Create beautifully. Build your vision.</p>
-  <div class="ask"><input class="search" id="ai" value="Help me create a 30-day self-care journal" aria-label="Ask the AI Creator"><button class="btn gold" id="go" type="button" style="margin:0;border:0;cursor:pointer">Create ✦</button></div>
+  <div class="ask"><input class="search" id="ai" value="create a 30-day self-care journal" aria-label="Ask the AI Creator"><button class="btn gold" id="go" type="button" style="margin:0;border:0;cursor:pointer">Create ✦</button></div>
   <div class="steps" id="st"></div>
   <div class="dgrid">
     <div class="dt" style="background:var(--blush)"><b>✦</b><h3 class="serif">AI Creator</h3><p>Turn ideas into products</p></div>
@@ -173,6 +173,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
     <div class="dt" style="background:var(--sage)"><b>▦</b><h3 class="serif">Planner Studio</h3><p>Organise life and work</p></div>
     <div class="dt" style="background:#c9dde0"><b>▤</b><h3 class="serif">Book Builder</h3><p>Create e-books and PDFs</p><i class="soon">Coming soon</i></div>
     <div class="dt" style="background:var(--terra)"><b>◈</b><h3 class="serif">Product Business</h3><p>Prepare and manage products</p><i class="soon">Coming soon</i></div>
+    <div class="dt" style="background:var(--butter)" data-target="#brand-kit"><b>◈</b><h3 class="serif">Brand Kit</h3><p>Save your colours and brand name</p></div>
   </div>
   <p class="eyebrow" style="margin-top:26px">And more inside</p>
   <div class="tags"><span>Templates</span><span>Brand kit</span><span>PDF export</span><span>Product mockups</span><span>Creative Vault</span><span>Education resources</span><span>Palette and fonts</span><span>Backgrounds and patterns</span><span>Bundle builder</span><span>Creator community</span></div>
@@ -231,7 +232,8 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
       <div class="track"><b style="left:8%;width:50%;background:var(--lav)"></b></div>
       <div class="track"><b style="left:0;width:92%;background:var(--blush)"></b></div>
     </div>
-    <div class="panel"><h4>Brand Kit</h4>
+    <div class="panel">
+    <div class="panel" id="brand-kit" style="scroll-margin-top:80px">
       <div class="chips" id="sws" style="margin:0 0 14px"></div>
       <input class="search" id="bn" aria-label="Brand name" placeholder="Brand name" style="margin-bottom:12px">
       <p class="serif" id="bh" style="font-size:30px;margin:0;line-height:1.1">KREOVANTA</p>
