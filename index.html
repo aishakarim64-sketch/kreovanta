@@ -204,6 +204,14 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
     <input class="search" id="book-subtitle" placeholder="A little description of your book">
 
     <label for="book-content" style="display:block;margin-top:16px">Page 1 content</label>
+    
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0">
+  <button class="btn" type="button" onclick="bookPrevious()">← Previous</button>
+  <span id="book-page-number" style="font-size:14px;color:var(--muted)">Page 1 of 1</span>
+  <button class="btn" type="button" onclick="bookNext()">Next →</button>
+  <button class="btn gold" type="button" onclick="bookAddPage()">+ Add Page</button>
+</div>
+
     <textarea class="search" id="book-content" rows="8" placeholder="Start writing your first page here..." style="width:100%;resize:vertical"></textarea>
 
     <button class="btn gold" type="button" style="margin-top:16px" onclick="document.getElementById('book-preview-title').textContent=document.getElementById('book-title').value||'Your Book Title';document.getElementById('book-preview-subtitle').textContent=document.getElementById('book-subtitle').value;document.getElementById('book-preview-content').textContent=document.getElementById('book-content').value||'Your page content will appear here.';document.getElementById('book-preview').style.display='block'">Preview my book</button>
@@ -397,6 +405,48 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
 [].forEach.call(document.querySelectorAll('.dt'),function(e,i){var g=e.getAttribute('data-target')||['#repurpose','#create','#clipart','#plan','#book-builder'][i];if(g){e.style.cursor='pointer';e.onclick=function(){location.hash=g;};}});
 
 
+
+var bookPages = [''];
+var bookCurrentPage = 0;
+
+function bookSaveCurrent() {
+  bookPages[bookCurrentPage] = document.getElementById('book-content').value;
+}
+
+function bookRenderPage() {
+  document.getElementById('book-content').value = bookPages[bookCurrentPage];
+  document.getElementById('book-page-number').textContent =
+    'Page ' + (bookCurrentPage + 1) + ' of ' + bookPages.length;
+
+  var label = document.querySelector('label[for="book-content"]');
+  if (label) {
+    label.textContent = 'Page ' + (bookCurrentPage + 1) + ' content';
+  }
+}
+
+window.bookPrevious = function() {
+  bookSaveCurrent();
+  if (bookCurrentPage > 0) {
+    bookCurrentPage--;
+    bookRenderPage();
+  }
+};
+
+window.bookNext = function() {
+  bookSaveCurrent();
+  if (bookCurrentPage < bookPages.length - 1) {
+    bookCurrentPage++;
+    bookRenderPage();
+  }
+};
+
+window.bookAddPage = function() {
+  bookSaveCurrent();
+  bookPages.push('');
+  bookCurrentPage = bookPages.length - 1;
+  bookRenderPage();
+  document.getElementById('book-content').focus();
+};
 
 })();
 </script>
