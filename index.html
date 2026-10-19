@@ -216,7 +216,7 @@ footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;let
 
     <button class="btn gold" type="button" style="margin-top:16px" onclick="document.getElementById('book-preview-title').textContent=document.getElementById('book-title').value||'Your Book Title';document.getElementById('book-preview-subtitle').textContent=document.getElementById('book-subtitle').value;document.getElementById('book-preview-content').textContent=document.getElementById('book-content').value||'Your page content will appear here.';document.getElementById('book-preview').style.display='block'">Preview my book</button>
 
-    <div id="book-preview" style="display:none;margin-top:24px;padding:28px;background:var(--card);border:1px solid var(--line);border-radius:12px">
+    <div id="book-preview" style="display:none;margin-top:28px;padding:48px 32px;min-height:480px;background:linear-gradient(145deg,#fffaf0,#f7f1e3);border:1px solid #b48a2c;border-radius:4px;box-shadow:0 12px 35px rgba(18,54,43,.10);position:relative;overflow-wrap:anywhere">
       <p class="eyebrow">Book preview · Page 1</p>
       <h2 class="serif" id="book-preview-title">Your Book Title</h2>
       <p id="book-preview-subtitle" style="color:var(--muted)"></p>
