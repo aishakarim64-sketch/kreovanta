@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f1e3">
+  <meta name="description" content="Sign in to your KREOVANTA creative workspace.">
+  <title>Sign In | KREOVANTA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+
+  <style>
+    .login-page {
+      width: min(1000px, 100%);
+      margin: 0 auto;
+      padding: 42px 18px 64px;
+    }
+
+    .login-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      overflow: hidden;
+      border: 1px solid var(--line, rgba(18,54,43,.16));
+      border-radius: 24px;
+      background: var(--card, #fffaf0);
+    }
+
+    .login-intro {
+      padding: clamp(26px, 5vw, 48px);
+      background: #12362b;
+      color: #fffaf0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 400px;
+    }
+
+    .login-eyebrow {
+      font: 600 .75rem Inter, sans-serif;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: #e6cb83;
+    }
+
+    .login-intro h1 {
+      font: 500 clamp(2.6rem, 6vw, 4.4rem)/.98 "Cormorant Garamond", serif;
+      margin: 22px 0 18px;
+    }
+
+    .login-intro p {
+      max-width: 390px;
+      font: .95rem/1.9 Inter, sans-serif;
+      color: #f3ead7;
+    }
+
+    .login-decoration {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,250,240,.25);
+      color: #e6cb83;
+      font: italic 1.4rem "Cormorant Garamond", serif;
+    }
+
+    .login-form-panel {
+      padding: clamp(24px, 5vw, 46px);
+      align-self: center;
+      min-width: 0;
+    }
+
+    .login-form-panel h2 {
+      margin: 0 0 8px;
+      color: var(--text, #12362b);
+      font: 600 2.3rem "Cormorant Garamond", serif;
+    }
+
+    .login-description {
+      margin: 0 0 26px;
+      color: var(--muted, #4f6258);
+      font: .9rem/1.7 Inter, sans-serif;
+    }
+
+    .login-field {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .login-field label {
+      font: 600 .88rem Inter, sans-serif;
+      color: var(--text, #12362b);
+    }
+
+    .login-field input {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px;
+      border: 1px solid var(--line, rgba(18,54,43,.25));
+      border-radius: 10px;
+      box-sizing: border-box;
+      background: var(--bg, #f7f1e3);
+      color: var(--text, #12362b);
+      font: 1rem Inter, sans-serif;
+    }
+
+    .login-submit {
+      width: 100%;
+      min-height: 48px;
+      padding: 13px 18px;
+      border: 1px solid #12362b;
+      border-radius: 999px;
+      background: #12362b;
+      color: #fffaf0;
+      font: 600 .95rem Inter, sans-serif;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    .login-submit:hover {
+      opacity: .92;
+    }
+
+    .login-notice {
+      margin-top: 20px;
+      padding: 14px;
+      border: 1px solid var(--line, rgba(18,54,43,.16));
+      border-radius: 12px;
+      color: var(--text, #12362b);
+      background: var(--bg2, #efe6d0);
+      font: .84rem/1.7 Inter, sans-serif;
+    }
+
+    .login-status {
+      margin-top: 14px;
+      font: .88rem/1.7 Inter, sans-serif;
+      color: var(--text, #12362b);
+    }
+
+    .login-back {
+      display: inline-block;
+      margin-top: 22px;
+      color: var(--text, #12362b);
+      font: 600 .88rem Inter, sans-serif;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    @media (max-width: 700px) {
+      .login-page {
+        padding: 24px 14px 42px;
+      }
+
+      .login-layout {
+        grid-template-columns: minmax(0, 1fr);
+        border-radius: 18px;
+      }
+
+      .login-intro {
+        min-height: auto;
+        padding: 28px 24px;
+      }
+
+      .login-intro h1 {
+        font-size: 3rem;
+        margin: 16px 0 12px;
+      }
+
+      .login-decoration {
+        margin-top: 20px;
+      }
+
+      .login-form-panel {
+        padding: 28px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="login">
+  <div data-kreovanta-nav></div>
+
+  <main id="main-content" class="login-page">
+    <div class="login-layout">
+      <section class="login-intro">
+        <span class="login-eyebrow">Your creative space</span>
+
+        <h1>Welcome back to KREOVANTA.</h1>
+
+        <p>
+          Your ideas deserve an extraordinary space. Return to your creative
+          journey, organise your vision and make room for what comes next.
+        </p>
+
+        <div class="login-decoration">
+          Your vision. Your creativity. Your next chapter.
+        </div>
+      </section>
+
+      <section class="login-form-panel">
+        <h2>Sign in</h2>
+
+        <p class="login-description">
+          Your personal creator workspace starts here.
+        </p>
+
+        <form id="login-form">
+          <div class="login-field">
+            <label for="login-email">Email address</label>
+            <input
+              id="login-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            >
+          </div>
+
+          <div class="login-field">
+            <label for="login-password">Password</label>
+            <input
+              id="login-password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Authentication not connected"
+              required
+            >
+          </div>
+
+          <button class="login-submit" type="submit">
+            Sign in
+          </button>
+
+          <p id="login-status" class="login-status" aria-live="polite"></p>
+        </form>
+
+        <div class="login-notice">
+          <strong>Early setup notice</strong><br>
+          Secure account authentication is not connected yet. This form
+          does not sign you in, create an account or send your credentials
+          anywhere. Please do not enter a real password.
+        </div>
+
+        <a class="login-back" href="index.html">
+          ← Return to KREOVANTA
+        </a>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
