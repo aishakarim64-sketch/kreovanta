@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f1e3">
+  <meta name="description" content="Create and customise your brand identity in KREOVANTA Brand Kit.">
+  <title>Brand Kit | KREOVANTA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+
+  <style>
+    .brand-page {
+      width: min(1100px, 100%);
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+
+    .brand-heading {
+      margin-bottom: 30px;
+    }
+
+    .brand-heading h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.5rem, 7vw, 4.2rem);
+      line-height: 1;
+      margin: 12px 0;
+      color: var(--text, #12362b);
+    }
+
+    .brand-heading p {
+      max-width: 650px;
+      line-height: 1.8;
+      color: var(--muted, #4f6258);
+    }
+
+    .brand-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .brand-panel {
+      padding: 24px;
+      border: 1px solid var(--line, rgba(18,54,43,.16));
+      border-radius: 20px;
+      background: var(--card, #fffaf0);
+      min-width: 0;
+    }
+
+    .brand-panel h2 {
+      margin: 0 0 20px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      color: var(--text, #12362b);
+    }
+
+    .brand-field {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .brand-field label {
+      font-weight: 600;
+      font-size: .92rem;
+    }
+
+    .brand-field input,
+    .brand-field select {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid var(--line, rgba(18,54,43,.25));
+      border-radius: 10px;
+      background: var(--bg, #f7f1e3);
+      color: var(--text, #12362b);
+      font: inherit;
+      box-sizing: border-box;
+    }
+
+    .brand-field input[type="color"] {
+      padding: 5px;
+      min-height: 50px;
+      cursor: pointer;
+    }
+
+    .brand-help {
+      font-size: .83rem;
+      line-height: 1.6;
+      color: var(--muted, #4f6258);
+    }
+
+    .brand-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .brand-save,
+    .brand-reset {
+      min-height: 46px;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .brand-save {
+      border: 1px solid #12362b;
+      background: #12362b;
+      color: #fffaf0;
+    }
+
+    .brand-reset {
+      border: 1px solid var(--line, rgba(18,54,43,.25));
+      background: transparent;
+      color: var(--text, #12362b);
+    }
+
+    .brand-status {
+      min-height: 24px;
+      margin-top: 16px;
+      line-height: 1.5;
+      color: var(--text, #12362b);
+    }
+
+    .brand-preview {
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid var(--line, rgba(18,54,43,.16));
+      background: var(--preview-background, #f7f1e3);
+      color: var(--preview-primary, #12362b);
+      font-family: var(--preview-font, "Cormorant Garamond", serif);
+    }
+
+    .brand-preview-top {
+      padding: 24px;
+      background: var(--preview-primary, #12362b);
+      color: #fffaf0;
+    }
+
+    .brand-preview-top small {
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-family: Inter, sans-serif;
+      font-size: .7rem;
+    }
+
+    .brand-preview-main {
+      padding: 26px 22px;
+    }
+
+    .brand-preview-logo {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      max-height: 72px;
+      object-fit: contain;
+      margin-bottom: 16px;
+    }
+
+    .brand-preview-main h3 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.05;
+      overflow-wrap: anywhere;
+      margin: 0 0 12px;
+      font-weight: 600;
+    }
+
+    .brand-preview-main p {
+      font-family: Inter, sans-serif;
+      line-height: 1.7;
+      font-size: .9rem;
+      color: var(--preview-primary, #12362b);
+    }
+
+    .brand-preview-chip {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: var(--preview-accent, #b48a2c);
+      color: #fff;
+      font-family: Inter, sans-serif;
+      font-size: .8rem;
+      font-weight: 600;
+    }
+
+    .brand-swatches {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .brand-swatch {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line, rgba(18,54,43,.16));
+      border-radius: 10px;
+      background: var(--card, #fffaf0);
+    }
+
+    .brand-swatch-color {
+      height: 48px;
+    }
+
+    .brand-swatch span {
+      display: block;
+      padding: 8px 5px;
+      font: 11px Inter, sans-serif;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    .brand-local-note {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--bg2, #efe6d0);
+      color: var(--text, #12362b);
+      font-size: .86rem;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 760px) {
+      .brand-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .brand-page {
+        padding: 26px 14px 44px;
+      }
+
+      .brand-panel {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body data-page="brand-kit">
+  <div data-kreovanta-nav></div>
+
+  <main id="main-content" class="brand-page">
+    <header class="brand-heading">
+      <p class="brand-help">YOUR CREATIVE WORKSPACE / BRAND IDENTITY</p>
+      <h1>Brand Kit</h1>
+      <p>
+        Give your creative work a recognisable identity. Choose your colours,
+        typography and logo, then preview your brand before saving it.
+      </p>
+    </header>
+
+    <div class="brand-layout">
+      <section class="brand-panel" aria-labelledby="brand-settings-title">
+        <h2 id="brand-settings-title">Your brand settings</h2>
+
+        <form id="brand-kit-form">
+          <div class="brand-field">
+            <label for="brandName">Brand name</label>
+            <input id="brandName" name="brandName" type="text"
+              maxlength="70" value="KREOVANTA" required>
+          </div>
+
+          <div class="brand-field">
+            <label for="brandPrimary">Primary colour</label>
+            <input id="brandPrimary" name="brandPrimary"
+              type="color" value="#12362b" required>
+            <span class="brand-help">Used for your main brand colour.</span>
+          </div>
+
+          <div class="brand-field">
+            <label for="brandAccent">Accent colour</label>
+            <input id="brandAccent" name="brandAccent"
+              type="color" value="#b48a2c" required>
+            <span class="brand-help">Used for highlights and details.</span>
+          </div>
+
+          <div class="brand-field">
+            <label for="brandBackground">Background colour</label>
+            <input id="brandBackground" name="brandBackground"
+              type="color" value="#f7f1e3" required>
+          </div>
+
+          <div class="brand-field">
+            <label for="brandFont">Heading font</label>
+            <select id="brandFont" name="brandFont">
+              <option value="Cormorant Garamond">Cormorant Garamond</option>
+              <option value="Playfair Display">Playfair Display</option>
+              <option value="DM Sans">DM Sans</option>
+              <option value="Inter">Inter</option>
+            </select>
+          </div>
+
+          <div class="brand-field">
+            <label for="brandLogoUrl">Logo image URL (optional)</label>
+            <input id="brandLogoUrl" name="brandLogoUrl" type="url"
+              inputmode="url" placeholder="https://example.com/logo.png">
+            <span class="brand-help">
+              Use a publicly accessible HTTPS image URL. A logo uploaded
+              directly from your phone is not supported yet.
+            </span>
+          </div>
+
+          <div class="brand-actions">
+            <button class="brand-save" type="submit">Save Brand Kit</button>
+            <button class="brand-reset" id="brand-kit-reset" type="button">
+              Restore defaults
+            </button>
+          </div>
+
+          <p id="brand-kit-status" class="brand-status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="brand-panel" aria-labelledby="brand-preview-title">
+        <h2 id="brand-preview-title">Live preview</h2>
+
+        <div class="brand-preview" id="brand-preview">
+          <div class="brand-preview-top">
+            <small>YOUR CREATIVE IDENTITY</small>
+          </div>
+
+          <div class="brand-preview-main">
+            <img id="brand-preview-logo" class="brand-preview-logo"
+              alt="Brand logo preview" hidden>
+
+            <h3 id="brand-preview-name">KREOVANTA</h3>
+
+            <p>
+              Ideas deserve an extraordinary space. Make your next creative
+              project unmistakably yours.
+            </p>
+
+            <span class="brand-preview-chip">Your brand, your way</span>
+          </div>
+        </div>
+
+        <div class="brand-swatches" aria-label="Brand colour preview">
+          <div class="brand-swatch">
+            <div class="brand-swatch-color"
+              style="background:var(--preview-primary,#12362b)"></div>
+            <span>Primary</span>
+          </div>
+
+          <div class="brand-swatch">
+            <div class="brand-swatch-color"
+              style="background:var(--preview-accent,#b48a2c)"></div>
+            <span>Accent</span>
+          </div>
+
+          <div class="brand-swatch">
+            <div class="brand-swatch-color"
+              style="background:var(--preview-background,#f7f1e3)"></div>
+            <span>Background</span>
+          </div>
+        </div>
+
+        <div class="brand-local-note">
+          <strong>Storage notice:</strong> Your Brand Kit is currently saved
+          only in this browser on this device. It is not yet synced to an
+          account or shared across devices.
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
